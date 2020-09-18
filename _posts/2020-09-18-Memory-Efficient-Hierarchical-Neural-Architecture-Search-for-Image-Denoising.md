@@ -11,7 +11,7 @@ Image denoising underlying goal is to restore a clean image from a noisy image.
 ## Neural Architecture Search  
 Neural Architecture Search (NAS) is a research field that first emerged from the efforts to automate the architecture design process with an aim to design the most optimal neural network architecture for a given task.  
 
-![NAS](./assets/img-HiNAS/NAS_1.png). 
+![NAS](../assets/img-HiNAS/NAS_1.png)  
 
 **Summary of the NAS algorithm:**  
 <ol>
@@ -37,7 +37,7 @@ First we have the Global Search Space (with the search known as macro-architectu
 HiNAS uses the cell based search space method - and more specifically Hierarchical Search Spaces which we will read about later. Micro or Cell based Search Space methods limits the optimization algorithm from creating arbitrary networks.  
 Motivated by the many effective handcrafted architectures designed with repetitions of fixed patterns, A cell-based search space consists of repeated blocks of layers called Cells.  
 
-![NASNET](./assets/img-HiNAS/NASNET.jpg). 
+![NASNET](../assets/img-HiNAS/NASNET.jpg)  
 
 **Hierarchical Structure**  
 
@@ -48,15 +48,15 @@ Hierarchical structures start with small sets of primitives, including individua
     (ℓ) is a set of operations, (ℓ)={o(ℓ)1,o(ℓ)2,…}
     An adjacency matrix G(ℓ) specifies the neural network graph of operations, where the entry Gij=k indicates that operation o(ℓ)k is placed between node i and j. 
 
-![HS_1](./assets/img-HiNAS/HS_1.png)
+![HS_1](../assets/img-HiNAS/HS_1.png)
 
 (Illustration of the assembly process) An example of a three-level hierarchical architecture representation. The bottom row shows how level-1 primitive operations o1(1), o2(1), o3(1) are assembled into a level-2 motif o1(2). The top row shows how level-2 motifs o1(2), o2(2), o3(2) are then assembled into a level-3 motif o1(3). [Hierarchical Representations for Efficient Architecture Search](https://arxiv.org/abs/1711.00436)  
 
 To build a network according to the hierarchical structure, we start from the lowest level ℓ=1 and recursively define the m-th motif operation at level ℓ as  
-![HS_2](./assets/img-HiNAS/HS_2.png)  
+![HS_2](../assets/img-HiNAS/HS_2.png)  
 
 A hierarchical architecture representation is defined by,  
-![HS_3](./assets/img-HiNAS/HS_last.png)  
+![HS_3](../assets/img-HiNAS/HS_last.png)  
 
 as it is determined by network structures of motifs at all levels and the set of bottom-level primitives.  
 
@@ -66,7 +66,7 @@ as it is determined by network structures of motifs at all levels and the set of
 [DARTS: Differentiable Architecture Search](https://arxiv.org/abs/1806.09055)  
 Differentiable Architecture Search (DARTS) is an efficient gradient-based search method which has been published at ICLR 2019.  
 
-![DARTS](./assets/img-HiNAS/darts_1.png)  
+![DARTS](../assets/img-HiNAS/darts_1.png)  
 
 **Improvements**. 
 DARTS is shown to find architectures in image classification in only a matter of a few GPU days while archiving state of the art performance.  
@@ -79,13 +79,13 @@ NAS search spaces are discrete for example one architecture differs from the oth
 
 The cell we search can be though as a directed acyclic graph where each node x is a latent representation (e.g. a feature map in convolutional networks) and each directed edge (i, j) is associated with some operation o(i,j) (convolution, max-pooling, etc) that transforms x(i) and stored a latent representation at node x(j)  
 
-![darts_eq1](./assets/img-HiNAS/Dart_eq1.png)  
+![darts_eq1](../assets/img-HiNAS/Dart_eq1.png)  
 
 the output of each node can be calculated by the equation on the left. The nodes are enumerated in such a way, that there is an edge(i,j) from node x(i) to x(j), then i<j.  
 
 In order to transform the problem of architecture search to a continuous one, let us consider a set O of operations, such as convolutions, dilated convolutions, max pooling, and zero (i.e., no connection). We can then parametrize o(i,j) as  
 
-![darts_eq2](./assets/img-HiNAS/dart_eq2.png)  
+![darts_eq2](../assets/img-HiNAS/dart_eq2.png)  
 
 This is done with a softmax function.  
 
@@ -98,13 +98,13 @@ The training loss L_train and validation loss L_val are determined by the archit
 
 The approximate gradient can be found since α is now continuous. ξ is assumed to be the step of an inner optimization learning rate.
 
-![darts_eq3](./assets/img-HiNAS/dart_eq3.png)  
+![darts_eq3](../assets/img-HiNAS/dart_eq3.png)  
 
 In continuous relaxation, instead of having a single operation between two nodes. a convex combination of each possible operation is used. To model this in the graph, multiple edges between two nodes are kept, each corresponding to a particular operation. And each edge also has a weight α.  
 
 After training some α’s of some edges become much larger than the others. To derive the discrete architecture for this continuous model, in between two nodes the only edge with maximum weight is kept.  
 
-![darts_CR](./assets/img-HiNAS/dart_CR.png) 
+![darts_CR](../assets/img-HiNAS/dart_CR.png) 
 
 ---
 ## Memory-Efficient Hierarchical Neural Architecture Search for Image Denoising
