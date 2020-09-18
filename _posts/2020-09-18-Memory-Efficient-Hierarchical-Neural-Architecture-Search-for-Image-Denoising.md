@@ -50,6 +50,7 @@ Hierarchical structures start with small sets of primitives, including individua
 ---
 
 ## Differential Architecture Search (DARTS). 
+[DARTS: Differentiable Architecture Search](https://arxiv.org/abs/1806.09055)  
 Differentiable Architecture Search (DARTS) is an efficient gradient-based search method which has been published at ICLR 2019.  
 **Improvements**. 
 DARTS is shown to find architectures in image classification in only a matter of a few GPU days while archiving state of the art performance.  
