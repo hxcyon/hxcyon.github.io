@@ -107,18 +107,57 @@ After training some α’s of some edges become much larger than the others. To 
 ![darts_CR](../assets/img-HiNAS/dart_CR.png) 
 
 ---
+## Auto-Deeplab
+[Auto-Deeplab : Hierarchical Neural Architecture Search for Semantic Image Segmentation](https://arxiv.org/abs/1901.02985)  
+DARTS only searches for the best cells (micro) in a given architecture and does not search for the best architecture on a network level. Auto-Deeplab searches the network level structure in addition to the cell level structure, forming a hierarchical search space.  
+This is done by augmenting the cell level search space with a trellis-like network level search space. The architecture is then decoded using the Viterbi algorithm to keep the path with the strongest connections (maximum probability) in the trellis.  
+
+![ADL](../assets/img-HiNAS/ADL-1.png)  
+Auto-Deeplab is proposed for an image segmentation task. Downsampling strategy is reasonable for an image classification class, however there are network variations for dense prediction tasks as spatial resolution needs to be kept high.  
+
+**Network Search implementation**  
+
+The two principles are noticed to be consistent:
+* The spatial resolution of the next layer is either twice as large, or twice as small, or remains the same.
+* The smallest spatial resolution is downsampled by 32
+
+First two layers of the architecture are downsampling layers and spatial resolution is reduced by a factor of 2. With the goal to find a good path in L-layer trellis, the further layers (total L-layers) are of unknown spatial resolutions, either being upsampled or downsampled by a given range. 
+
+---
+
 ## Memory-Efficient Hierarchical Neural Architecture Search for Image Denoising
 
+Hierarchical NAS (HiNAS) is a NAS to design effective neural network architectures for image denoising tasks.  
+HiNAS is both memory and computation efficient and is said to take 4.5 hours for searching on a single GPU.  
 
-Hierarchical NAS (HiNAS) is a NAS to design effective neural network architectures for image denoising tasks. HiNAS is both memory and computation efficient and is said to take 4.5 hours for searching on a single GPU. Motivated by the search efficiency, 
+Motivated by the search efficiency, HiNAS is implemented with gradient based search strategies employing the continuous relaxation strategy proposed in DARTS.  
 
-**HiNAS key ideas**  
-* HiNAS is implemented with gradient based search strategies employing the continuous relaxation strategy proposed in DARTS.  
-* HiNAS also relies on operations with adaptive receptive fields such as dilated convolutions and deformation convolutions to preserve pixel-level information. Instead of using downsample layers.  
-* Flexible hierarchical search space is employed and leave the task of deciding width of each cell to the NAS algorithm itself.  
-* Early stopping strategy is used to avoid the NAS collapse problem.  
+![HiNAS_1](../assets/img-HiNAS/HiNAS_1.png)
 
-**Due to the following advantages:**  
+The search space of HiNAS resembles Auto-Deeplab, by introducing multiple paths of different widths.   Flexible hierarchical search space is employed and the task of deciding the width of each cell to the NAS algorithm itself is left to make the search space more general.  
+However there are three major differences with Auto-Deeplab which are:  
+1) HiNAS relies on operations with adaptive receptive fields such as dilated convolutions and deformation convolutions to preserve pixel-level information. Instead of using downsample layers.  
+2) The cell is shared across different paths leading to improvements in memory efficiency.  
+3) Employed early stopping strategy to avoid the NAS collapse problem.  
+
+Both DARTS and Auto-Deeplab are proposed for high-level image understanding tasks. DARTS is proposed for image classification and Auto-Deeplab finds architectures for semantic segmentation. Whereas HiNAS is proposed for low-level image restoration tasks.  
+
+**Cell Sharing**  
+
+![HiNAS_2](../assets/img-HiNAS/HiNAS_2.png)
+
+In Auto-Deeplab, the outputs from the three different levels are processed first by separate cells of different weights then summed into the output. 
+Equation used to select features strides for image segmentation.  
+
+![HiNAS_3](../assets/img-HiNAS/HiNAS_3.png)  
+
+By sharing the cell, HiNAS saves memory consumption by a factor of 3 in the supernet (example given).  
+
+![HiNAS_4](../assets/img-HiNAS/HiNAS_4.png)  
+HiNAS implementation
+
+
+**HiNAS advantages:**  
 * gradient based search strategy. HiNAS only needs to train one supernet in the search stage unlike Evolutionary Algorithms based NAS method.  
 * Cells shared across different feature levels, thus saving memory consumption.  
 * early-stopping search strategy.  
