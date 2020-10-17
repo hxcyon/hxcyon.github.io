@@ -10,13 +10,14 @@ Firsly, here is the [DARTS Test on pretrained model Google Colab ipython file](h
 **Some changes made:**  
 1. new changes: PyTorch == 1.6.0, torchvision == 0.7.0  
 
-On the Official Implementation of DARTS the requirements were 
+On the Official Implementation of DARTS the requirements are 
     
     PyTorch == 0.3.1, torchvision == 0.2.0  
 
-Torch 0.3 is incompatible with CUDA 9 and above, so I have tried to install CUDA 8 instead. However, Colab uses Tesla T4 GPU which requires CUDA 9 and above. Google Colab comes with already installed CUDA 10.1. For this experiment we will use Torch 1.6.0 which is preinstalled by Colab. 
+Torch 0.3 is incompatible with CUDA 9 and above, so I have tried to install CUDA 8 instead. However, Colab uses Tesla T4 GPU which requires CUDA 9 and above. Google Colab comes with already installed CUDA 10.1. For this experiment we will use Torch 1.6.0 which is preinstalled by Colab.  
+
 2. when passing a .py file to ipython notebook environment some changes has to be made  
-Previously with the official implementation consisting of .py files:  
+The official implementation consisted of .py files which means:  
 
 To test pretrained model:  
 
@@ -26,9 +27,9 @@ To train model from scratch:
 
     cd cnn && python train.py --auxiliary --cutout
     
-Some arguments such as args parse and sys are modified to call user input directly into the code.  
+Some arguments such as args parse and sys were modified to call user input directly into the code.  
 
-3. Batch size is originally set to be 96 and modified to take batch size of 64.  
+3. Batch size is originally set to be 96 and is modified to take batch size of 64.  
 The batch size is reduced to 64 due to CUDA out of memory error. CUDA tried to allocate 20 MiB of memory when the maximum size it can allocate is 14 MiB.  
 
 4. Make modifications to the code to support PyTorch 1.6.0.  
