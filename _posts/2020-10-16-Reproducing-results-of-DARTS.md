@@ -40,16 +40,21 @@ Since .py file were combined into a single ipynb file, duplicate libraries were 
 
 **Results from test**  
 Package graphviz is used to visualize the learned cells.  
-Normal Cell  
+* Normal Cell  
 
+![Normal](../assets/stage-2/normal-darts.png)  
 
-Reduction Cell  
+* Reduction Cell  
 
+![Reduction](../assets/stage-2/reduction.png)  
 
 I have attempted to reproduce the results of DARTS.  
 here is the [DARTS Trained from scratch Google Colab ipython file](https://colab.research.google.com/drive/1B1WKhYY8_H6gDdP9dTeZWKm8NuV9fiz2?usp=sharing)  
 
 ## Performance Indicators
 The objective of DARTS as shown is to reduce search cost while still archiving low test error rate.  
+
+![Performance](../assets/stage-2/Performance-DARTS-CIFAR-10.png)  
+
 
 
