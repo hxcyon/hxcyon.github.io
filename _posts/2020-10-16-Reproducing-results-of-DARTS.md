@@ -42,7 +42,7 @@ Since .py file were combined into a single ipynb file, duplicate libraries were 
 Package graphviz is used to visualize the learned cells.  
 * Normal Cell  
 
-![Normal](../assets/stage-2/normal-darts.png)  
+![Normal](../assets/stage-2/normal.png)  
 
 * Reduction Cell  
 
