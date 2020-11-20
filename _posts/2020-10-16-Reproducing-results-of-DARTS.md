@@ -42,7 +42,7 @@ Since .py file were combined into a single ipynb file, duplicate libraries were 
 Package graphviz is used to visualize the learned cells.  
 * Normal Cell  
 
-![Normal](../assets/stage-2/normal-darts.png)  
+![Normal](../assets/stage-2/normal.png)  
 
 * Reduction Cell  
 
@@ -50,6 +50,16 @@ Package graphviz is used to visualize the learned cells.
 
 I have attempted to reproduce the results of DARTS.  
 here is the [DARTS Trained from scratch Google Colab ipython file](https://colab.research.google.com/drive/1B1WKhYY8_H6gDdP9dTeZWKm8NuV9fiz2?usp=sharing)  
+
+Modifications to the official implementation to view Normal and Reduction Cells at every epoch iterations.  
+The snapshot of cells at each epoch are named:  
+    
+    normal#number_of_epoch and reduction#number_of_epoch.  
+
+To visualize the cells, go to [DARTS Visualize cells Google Colab file](https://colab.research.google.com/drive/18gkaH7xHPIDROLGJAcnDI2x1tVtZrrEh?usp=sharing)  
+
+Turns out that the cells look exactly the same at each epoch.  
+View Genotypes.py file to see the fixed structure of the cells.  
 
 ## Performance Indicators
 The objective of DARTS as shown is to reduce search cost while still archiving low test error rate.  
