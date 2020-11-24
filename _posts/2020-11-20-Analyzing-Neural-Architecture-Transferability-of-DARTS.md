@@ -29,7 +29,7 @@ For this research experiment a couple of problems of existing research are deter
 
 For this task we want to train two DARTS model to search the cell architecture on a small dataset on CIFAR-10 and CIFAR-100 respectively.  
 
-![Figure-1](../assets/Stage-3/Figure-1.png) 
+![Figure-1](../assets/Stage-3/Figure-1.jpg) 
 
 Figure 1. DARTS_1 is pretrained on CIFAR-10 and DARTS_2 pretrained on CIFAR-100 for the same amount of time before runtime disconnect. Using the weights obtained we continue training on by swapping datasets and loading the weights. DARTS_2 is trained on CIFAR-100 and DARTS_1 is trained on CIFAR-10 for the same amount of time.  
 CIFAR-10 and CIFAR-100 are chosen as both consist of 32 x 32 sized images, this makes training of the model to be easier. 
