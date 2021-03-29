@@ -70,7 +70,7 @@ Note: ViT-Large has 24 layers with the hidden size of 1024 and 16 attention head
 Multi-Head Self Attention Layer (MSP) concatenates the multiple attention outputs linearly to the expected dimensions. The multiple attention heads help learn local and global dependencies of the image.
 ViT uses multi-head self-attention which helps remove image-specific inductive biases.
 
-I believe Multi-Head Attentions need a separate explanation of its own as thats the part that the magic happens: ADDLINKHERE.  
+I believe Multi-Head Attentions need a separate explanation of its own as thats the part where the magic happens: [link to where the magic happens](https://hxcyon.github.io/Multi-Head-Self-Attention-explanation/)  
 
 #### Visualization  
 **Let’s visualize some of its internal workings of ViT.**
