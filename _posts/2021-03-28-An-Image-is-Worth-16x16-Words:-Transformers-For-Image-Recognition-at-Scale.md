@@ -96,9 +96,14 @@ When ViT is trained on sufficient data it outperforms the state-of-the-art CNN w
 > While CNNs have revolutionized computer vision, our results indicate that models tailor-made for imaging tasks may be unnecessary, or even sub-optimal. With ever-increasing dataset sizes, and the continued development of unsupervised and semi-supervised methods, the development of new vision architectures that train more efficiently on these datasets becomes increasingly important. We believe ViT is a preliminary step towards generic, scalable architectures that can solve many vision tasks, or even tasks from many domains, and are excited for future developments.
 
 ----
-### References  
 References to papers are written under each heading!  
-TBA.  
-
+### References  
+ViT:
+https://medium.com/swlh/visual-transformers-a-new-computer-vision-paradigm-aa78c2a2ccf2  
+https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html  
+https://towardsdatascience.com/are-you-ready-for-vision-transformer-vit-c9e11862c539  
+BERT:  
+https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
+https://towardsdatascience.com/minimal-requirements-to-pretend-you-are-familiar-with-bert-3889023e4aa9
 
 
