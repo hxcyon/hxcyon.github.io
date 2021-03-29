@@ -14,6 +14,8 @@ BERT includes Encoders to understand the context of words. Encoders consists of 
 * Self Attention  
 Attention gives the capability to understand the relationship core mechanism between words. 
 
+<img src="../assets/ViT/Stage1/bert.png" width="500">
+
 **How does it work?**  
 The input is a sequence of tokens, which are embedded into vectors and then processed in the neural network.
 
@@ -26,6 +28,8 @@ To understand how Visual Transformers resolve the weakness in Convolutional Neur
 
 **Strengths of CNNs**  
 * CNN has inductive biases like translation invariance and locally restricted receptive field. Translational invariance helps to recognize an object even when its appearance varies, for example: rotation, zoom in/out. 
+ 
+<img src="../assets/ViT/Stage1/cnn_field.png" width="400">  
 
 **Weaknesses of CNNs**  
 * CNNs are specifically designed for images.  
@@ -51,6 +55,7 @@ Visual Transformer(ViT) uses visual tokens of divided input image and CNN uses p
 If we have a 32 x 32 input image, each pixel of the image will be passed as an input, the model will need to calculate self attention for 1024 combinations. 
 This operation very expensive and will not scale to realistic input size. To overcome this problem, ViT divides the images into small 16 x 16 patches. Also, a pixel at a corner of an image will probably not have a meaningful relationship with another pixel at the other corner of the image so images are segmented into patches.  
 
+<img src="../assets/ViT/Stage1/ViT.png" width="700"> 
 
 #### Workings of Visual Transformer  
 
@@ -64,10 +69,12 @@ Note: ViT-Large has 24 layers with the hidden size of 1024 and 16 attention head
 Multi-Head Self Attention Layer (MSP) concatenates the multiple attention outputs linearly to the expected dimensions. The multiple attention heads help learn local and global dependencies of the image.
 ViT uses multi-head self-attention which helps remove image-specific inductive biases.
 
-I believe Multi-Head Attentions need a separate explanation of its own: ADDLINKHERE
+I believe Multi-Head Attentions need a separate explanation of its own as thats the part that the magic happens: ADDLINKHERE.  
 
 #### Visualization  
 **Let’s visualize some of its internal workings of ViT.**
+
+<img src="../assets/ViT/Stage1/Vit_vis.jpeg" width="800"> 
 
 ViT is shown to be able to reproduce an intuitive image structure. Let’s take a look at the position embeddings — parameters that the model learns to encode the relative location of patches. The model is able to recover the grid structure of the original images as shown - each position embedding is similar to others in the same row and column.
 
@@ -80,6 +87,8 @@ The visualization shows that ViT can learn features hard-coded into CNNs such as
 * Higher accuracy and less computation time. Outperforms state of the art CNNs. 
 * Model architecture does not use CNNs.
 * Efficacy of Transformer with small patches
+
+<img src="../assets/ViT/Stage1/ViT_res.png" width="700"> 
 
 When ViT is trained on sufficient data it outperforms the state-of-the-art CNN with four times fewer computational resources.  
 
