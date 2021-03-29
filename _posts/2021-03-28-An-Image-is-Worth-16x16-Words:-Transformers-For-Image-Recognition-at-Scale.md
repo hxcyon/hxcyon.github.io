@@ -2,7 +2,8 @@
 
 ## Related Works & Prerequisites for Visual Transformers
 
-### BERT (Bidirectional Encoder Representations from Transformers) 
+### BERT (Bidirectional Encoder Representations from Transformers)  
+[Bidirectional Encoder Representations from Transformers](https://arxiv.org/abs/1810.04805)  
 Before we take a look at ViT let’s look at the classic NLP state-of-the-art: BERT, published by researchers at Google AI Language in 2018.  
 
 #### There are three main ideas from BERT:  
@@ -41,7 +42,7 @@ To understand how Visual Transformers resolve the weakness in Convolutional Neur
 
 ## Visual Transformers
 ### An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale
-
+[An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)  
 
 Transformer models can handle variable sized input using stacks of Self-Attention instead of CNNs & RNNs, and they have worked excellently with NLP and are now applied to images. Visual Transformers (ViT) is a modification to the Transformer design to make it operate directly on images instead of words.  
 The input image is represented as a sequence of images patches in ViT is similar to the sequence of world embeddings used when applying Transformers to text (like BERT!).  
@@ -96,6 +97,7 @@ When ViT is trained on sufficient data it outperforms the state-of-the-art CNN w
 
 ----
 ### References  
+References to papers are written under each heading!  
 TBA.  
 
 
