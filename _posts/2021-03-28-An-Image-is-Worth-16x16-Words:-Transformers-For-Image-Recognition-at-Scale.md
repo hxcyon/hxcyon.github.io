@@ -98,12 +98,12 @@ When ViT is trained on sufficient data it outperforms the state-of-the-art CNN w
 ----
 References to papers are written under each heading!  
 ### References  
-ViT:
-https://medium.com/swlh/visual-transformers-a-new-computer-vision-paradigm-aa78c2a2ccf2  
-https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html  
-https://towardsdatascience.com/are-you-ready-for-vision-transformer-vit-c9e11862c539  
+ViT:  
+[Visual Transformers: A New Computer Vision Paradigm](https://medium.com/swlh/visual-transformers-a-new-computer-vision-paradigm-aa78c2a2ccf2)  
+[Transformers for Image Recognition at Scale](https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html)   
+[Are You Ready for Vision Transformer (ViT)?](https://towardsdatascience.com/are-you-ready-for-vision-transformer-vit-c9e11862c539)  
 BERT:  
-https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
-https://towardsdatascience.com/minimal-requirements-to-pretend-you-are-familiar-with-bert-3889023e4aa9
+[BERT Explained: State of the art language model for NLP](https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270)  
+[Minimal Requirements to Pretend You are Familiar with BERT](https://towardsdatascience.com/minimal-requirements-to-pretend-you-are-familiar-with-bert-3889023e4aa9)
 
 
