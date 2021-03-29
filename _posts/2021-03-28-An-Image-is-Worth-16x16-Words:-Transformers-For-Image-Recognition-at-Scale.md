@@ -1,12 +1,10 @@
-# An Image is Worth 16x16 Words: Transformers For Image Recognition at Scale  
+# Related Works & Prerequisites for Visual Transformers
 
-## Related Works & Prerequisites for Visual Transformers
-
-### BERT (Bidirectional Encoder Representations from Transformers)  
+## BERT (Bidirectional Encoder Representations from Transformers)  
 [Bidirectional Encoder Representations from Transformers](https://arxiv.org/abs/1810.04805)  
 Before we take a look at ViT let’s look at the classic NLP state-of-the-art: BERT, published by researchers at Google AI Language in 2018.  
 
-#### There are three main ideas from BERT:  
+### There are three main ideas from BERT:  
 * bidirectional   
 The order of inputs for a transformer is bidirectional which means that the sequence of inputs no not need to be processed in order unlike RNNs.
 Which means that the Transformer can process the middle or the end of the sentence first before it processes the beginning of a sentence. 
@@ -24,7 +22,7 @@ Results show that a bidirectionally trained language model can have a deeper sen
 
 ----
 
-### Convolutional Neural Networks (CNN)
+## Convolutional Neural Networks (CNN)
 To understand how Visual Transformers resolve the weakness in Convolutional Neural Networks we need to first know about the strength and weaknesses of CNNs.  
 
 **Strengths of CNNs**  
@@ -40,8 +38,8 @@ To understand how Visual Transformers resolve the weakness in Convolutional Neur
 
 ----
 
-## Visual Transformers
-### An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale
+# Visual Transformers
+## An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale
 [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)  
 
 Transformer models can handle variable sized input using stacks of Self-Attention instead of CNNs & RNNs, and they have worked excellently with NLP and are now applied to images. Visual Transformers (ViT) is a modification to the Transformer design to make it operate directly on images instead of words.  
@@ -51,14 +49,14 @@ The input image is represented as a sequence of images patches in ViT is similar
 Visual Transformer(ViT) uses visual tokens of divided input image and CNN uses pixel arrays.
 
 
-#### Solutions to the Major Challenge of Transformers  
+### Solutions to the Major Challenge of Transformers  
 **A major challenge** of Transformer without CNN to images is applying Self-Attention to each pixels making the cost of self attention to be quadratic. 
 If we have a 32 x 32 input image, each pixel of the image will be passed as an input, the model will need to calculate self attention for 1024 combinations. 
 This operation very expensive and will not scale to realistic input size. To overcome this problem, ViT divides the images into small 16 x 16 patches. Also, a pixel at a corner of an image will probably not have a meaningful relationship with another pixel at the other corner of the image so images are segmented into patches.  
 
 <img src="../assets/ViT/Stage1/ViT.png" width="700"> 
 
-#### Workings of Visual Transformer  
+### Workings of Visual Transformer  
 
 Input image is split into fixed-size 16 x 16 patches.  
 An input Image of size H x W is split into N patches where N = H * W / P². 
@@ -66,13 +64,13 @@ Each patch is flattened into a vector embedding by concatenating all pixel chann
 
 Note: ViT-Large has 24 layers with the hidden size of 1024 and 16 attention heads.  
 
-#### Transformer Encoder  
+### Transformer Encoder  
 Multi-Head Self Attention Layer (MSP) concatenates the multiple attention outputs linearly to the expected dimensions. The multiple attention heads help learn local and global dependencies of the image.
 ViT uses multi-head self-attention which helps remove image-specific inductive biases.
 
 I believe Multi-Head Attentions need a separate explanation of its own as thats the part where the magic happens: [link to where the magic happens](https://hxcyon.github.io/Multi-Head-Self-Attention-explanation/)  
 
-#### Visualization  
+### Visualization  
 **Let’s visualize some of its internal workings of ViT.**
 
 <img src="../assets/ViT/Stage1/Vit_vis.jpeg" width="800"> 
@@ -84,7 +82,7 @@ Lower layers of ViT is shown to capture both global and local features. By contr
 
 The visualization shows that ViT can learn features hard-coded into CNNs such as awareness of grid structure, but is also are free to learn more generic patterns, such as a mix of local and global features at lower layers, that can help generalization.
 
-#### Major Contributions made by ViT:
+### Major Contributions made by ViT:
 * Higher accuracy and less computation time. Outperforms state of the art CNNs. 
 * Model architecture does not use CNNs.
 * Efficacy of Transformer with small patches
@@ -97,7 +95,7 @@ When ViT is trained on sufficient data it outperforms the state-of-the-art CNN w
 
 ----
 References to papers are written under each heading!  
-### References  
+## References  
 ViT:  
 [Visual Transformers: A New Computer Vision Paradigm](https://medium.com/swlh/visual-transformers-a-new-computer-vision-paradigm-aa78c2a2ccf2)  
 [Transformers for Image Recognition at Scale](https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html)   
