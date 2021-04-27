@@ -9,6 +9,6 @@ PyTorch implementation of "RIFE: Real-Time Intermediate Flow Estimation for Vide
 
 **Test on Video Frame Interpolation models**  
 Google Colab [Super-SloMo](https://drive.google.com/file/d/1ZLRiG26bDlaaMpCwX-esh6EkAr7L47p7/view?usp=sharing)  
-Google Colab [RIFE](https://drive.google.com/file/d/1ZLRiG26bDlaaMpCwX-esh6EkAr7L47p7/view?usp=sharing)  
+Google Colab [RIFE](https://drive.google.com/file/d/1VCstXdI5w3uY3WOFK6KUrEb9wvLgfLh-/view?usp=sharing)  
 
 
