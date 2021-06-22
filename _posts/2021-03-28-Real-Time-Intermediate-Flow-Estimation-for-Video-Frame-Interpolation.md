@@ -23,12 +23,15 @@ These bi-directional intermediate flows are computed directly from images by a n
 
 For most flow based VFI methods, bi-directional flows are first computed from pretrained optical flow models, then these flows are linearly combined. There are two ways of warping frames for Flow-based VFI methods and they can be classified into forward warping based methods and backward warping based methods. 
 
+<p align="center"><img src="../assets/VFI/RIFE/RIFE-warping.png" width="600"></p>
+
 Backward warping is preferred over forward warping as forward warping lacks unified and efficient implementation and as shown in (A) holes can occur in the warped image (marked in grey), when copying the pixel (x,y) to the nearest neighbor of T(x,y). Additionally Forward warping suffers from conflicts when pixels from multiple sources are mapped to the same location, which leads to overlapped pixels and holes. As shown in (B), backward warping helps eliminate this problem as intensities at locations that do not coincide with pixel coordinates can be obtained from the original image using interpolation. For example the value of pixel (x,y) is interpolated from the neighbors of T<sup>-1</sup>(x,y).
 
 Given the input frames I<sub>0</sub>, I<sub>1</sub>, we can approximate the intermediate optical flows F<sub>t->0</sub>, F<sub>t->1</sub> by backward warping from the perspective of the frame I<sub>t</sub> that we are expected to generate.
 
 
 ### Previous methods share two major drawbacks 
+
  1) Real-time speed could not be achieved as bi-directional flow estimation is coupled with large complexities. Previous methods usually need to approximate various representations such as image depth and intermediate flow refinement, to eliminate artifacts brought by the linear combination of optical flows. 
  2) There is no direct supervision for the approximated intermediate flows, making the system difficult to converge. Model trained on reconstruction losses.
 
@@ -40,6 +43,7 @@ Given the input frames I<sub>0</sub>, I<sub>1</sub>, we can approximate the inte
 
 Further, experiments have shown that RIFE can achieve impressive performance on public benchmarks.
 
+---
 
 ## Understanding RIFE 
 
@@ -50,21 +54,30 @@ supervise the intermediate flow model.
  1. IFNet - to efficiently estimate intermediate flows.
  2. FusionNet - Fuse the warped frames.
 
+<p align="center"><img src="../assets/VFI/RIFE/RIFE-overview.png" width="700"></p>
 
 ### IFNet 
 
 IFNet neural network is used to directly estimate the intermediate optical flows from input images. IFNet adopts a coarse-to-fine strategy by iteratively updating a slow field via successive IFBlocks increasing the resolutions progressively. IFBlocks are ResNet blocks, containing no computationally expensive operators like cost volume or pyramid feature warping.
 
+<p align="center"><img src="../assets/VFI/RIFE/RIFE-IFNet.png" width="400"></p>
+
 IFNet has a stacked hour-glass structure. A rough prediction of the flow is first made on low resolutions to capture large motions easier, then the flow fields are refined iteratively via successive IFBlocks operating on gradually increasing resolutions:
+
+<p align="center"><img src="../assets/VFI/RIFE/RIFE-IFNet-eq.png" width="400"></p>
 
 F&#770;<sub>t->0</sub><sup>i-1</sup> denotes the current estimation of the intermediate flow.
 I&#770;<sub>0->t</sub><sup>i-1</sup> and I&#770;<sub>0->t</sub><sup>i-1</sup> denote the warped input frames using previous approximated flow, and g<sup>i</sup> represents the i<sup>th</sup> IFBlock. 
+
+<p align="center"><img src="../assets/VFI/RIFE/RIFE-flow-estimation.png" width="400"></p>
 
 
 ### FusionNet 
 
 We can obtain the coarse reconstruction I&#770;<sub>0->t</sub> , I&#770;<sub>0->t</sub>, given the estimated intermediate flows F<sub>t->0</sub> and F<sub>t->1</sub> 
 by backward warping on input frames. To reduce the severe artifacts in the warped frames, we perform a fusion process formulated as:
+
+<p align="center"><img src="../assets/VFI/RIFE/RIFE-FusionNet.png" width="400"></p>
 
 > Where M is a soft fusion map used to fuse the two warped frames, ∆ is the reconstruction residual term used to refine the details in images, ⊙ is an element-wise multiplier, and (0 ≤ M, ∆ ≤ 1).
 
@@ -77,6 +90,8 @@ Aligned pyramid features C<sub>0->t</sub> and C<sub>1->t</sub> are produced from
 ###  Leakage Distillation loss for IFNet
 
 RIFE requires strong supervision compared to other VFI flow based methods. Approximating the intermediate flow is hard due to the lack of supervision as there are no ground truth intermediate flow images. To address this problem, the authors of RIFE proposed a more advanced supervision to the intermediate flow model, named leakage distillation loss which is added during training. Leakage distillation loss employs a teacher with access to the intermediate frames during training:
+
+<p align="center"><img src="../assets/VFI/RIFE/RIFE-Leakage-Distillation.png" width="400"></p>
 
 { I<sub>0</sub> , I<sub>t</sub><sup>GT</sup> } and { I<sub>t</sub><sup>GT</sup> , I <sub>1</sub> } are fed to a pre-trained optical flow estimation network to obtain the intermediate flow prediction {F<sub>t->1</sub><sup>leak</sup>, F<sub>t->0</sub><sup>leak</sup>}.
 Leakage distillation loss is applied over the full sequence of predictions.
