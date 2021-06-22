@@ -43,6 +43,9 @@ Further, experiments have shown that RIFE can achieve impressive performance on 
 
 ## Understanding RIFE 
 
+We will go over the components in RIFE and the proposed leakage distillation loss that serves to 
+supervise the intermediate flow model. 
+
 ### The two major components in RIFE:
  1. IFNet - to efficiently estimate intermediate flows.
  2. FusionNet - Fuse the warped frames.
@@ -56,3 +59,27 @@ IFNet has a stacked hour-glass structure. A rough prediction of the flow is firs
 
 F&#770;<sub>t->0</sub><sup>i-1</sup> denotes the current estimation of the intermediate flow.
 I&#770;<sub>0->t</sub><sup>i-1</sup> and I&#770;<sub>0->t</sub><sup>i-1</sup> denote the warped input frames using previous approximated flow, and g<sup>i</sup> represents the i<sup>th</sup> IFBlock. 
+
+
+### FusionNet 
+
+We can obtain the coarse reconstruction I&#770;<sub>0->t</sub> , I&#770;<sub>0->t</sub>, given the estimated intermediate flows F<sub>t->0</sub> and F<sub>t->1</sub> 
+by backward warping on input frames. To reduce the severe artifacts in the warped frames, we perform a fusion process formulated as:
+
+> Where M is a soft fusion map used to fuse the two warped frames, ∆ is the reconstruction residual term used to refine the details in images, ⊙ is an element-wise multiplier, and (0 ≤ M, ∆ ≤ 1).
+
+The fusion process includes a context extractor and a FusionNet with an encoder-decoder architecture similar to that of a U-Net. The context extractor is used to extract pyramid contextual features from raw inputs separately. Pyramid contextual features are denoted as: C<sub>0</sub>: {C<sub>0</sub><sup>1</sup>, C<sub>0</sub><sup>2</sup>, C<sub>0</sub><sup>3</sup>, C<sub>0</sub><sup>4</sup>} and C<sub>1</sub> : {C<sub>1</sub><sup>1</sup> , C<sub>1</sub><sup>2</sup> , C<sub>1</sub><sup>3</sup> , C<sub>1</sub><sup>4</sup> }.
+Aligned pyramid features C<sub>0->t</sub> and C<sub>1->t</sub> are produced from backward warping on these features using estimated intermediate flows. The warped frames and intermediate flows are fed to the FusionNet to product fusion map M and the reconstruction residual ∆. 
+
+> The output of each block in the encoder part of the FusionNet is concatenated with the corresponding aligned pyramid features before fed into the next block.
+
+
+###  Leakage Distillation loss for IFNet
+
+RIFE requires strong supervision compared to other VFI flow based methods. Approximating the intermediate flow is hard due to the lack of supervision as there are no ground truth intermediate flow images. To address this problem, the authors of RIFE proposed a more advanced supervision to the intermediate flow model, named leakage distillation loss which is added during training. Leakage distillation loss employs a teacher with access to the intermediate frames during training:
+
+{ I<sub>0</sub> , I<sub>t</sub><sup>GT</sup> } and { I<sub>t</sub><sup>GT</sup> , I <sub>1</sub> } are fed to a pre-trained optical flow estimation network to obtain the intermediate flow prediction {F<sub>t->1</sub><sup>leak</sup>, F<sub>t->0</sub><sup>leak</sup>}.
+Leakage distillation loss is applied over the full sequence of predictions.
+
+
+
